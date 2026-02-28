@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import smtplib
 from email.mime.text import MIMEText
@@ -105,13 +105,7 @@ def contact():
 
 @app.route('/')
 def home():
-    """Root endpoint - API is running."""
-    return jsonify({
-        'message': 'Jay Kumawat Portfolio Backend API is running!',
-        'endpoints': {
-            'POST /contact': 'Submit contact form'
-        }
-    })
+    return render_template("index.html")
 
 
 # Run the app
