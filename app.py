@@ -105,7 +105,7 @@ def contact():
 
 @app.route('/')
 def home():
-    return render_template("templates/index.html")
+    return render_template("index.html")
 
 
 # Run the app
