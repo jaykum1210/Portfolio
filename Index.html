@@ -2582,7 +2582,7 @@
            4. Navbar (scroll + active link + mobile menu)
            5. Scroll Reveal (IntersectionObserver)
            6. Skills Toggle
-           7. Contact Form (fetch → Flask backend)
+           7. Contact Form (FormSubmit AJAX)
            8. Misc (ripple, cursor, skill stagger, smooth scroll)
          ===================================================== */
 
@@ -2786,20 +2786,18 @@
       });
 
       /* ─────────────────────────────────────────────────────
-         7. CONTACT FORM — Flask Integration
+         7. CONTACT FORM — FormSubmit AJAX Integration
             ─ Validates fields client-side first
-            ─ Sends JSON to your Flask /contact endpoint
+            ─ Sends form data to FormSubmit.co
             ─ Shows loading spinner, then success or error msg
-         ─────────────────────────────────────────────────────
-         ⚠️  IMPORTANT: Change FLASK_URL to your server address.
-              Locally: "http://localhost:5000"
-              After deploying: "https://your-domain.com"
+            ─ Resets form after successful submission
          ───────────────────────────────────────────────────── */
-      const FLASK_URL = "https://jayportfolio-mseo.onrender.com"; // ← change this if you deploy Flask
-
       const contactForm = document.getElementById("contactForm");
       const sendBtn = document.getElementById("sendBtn");
       const formStatus = document.getElementById("formStatus");
+
+      // FormSubmit endpoint
+      const FORMSUBMIT_URL = "https://formsubmit.co/ajax/jaykum122005@gmail.com";
 
       // Helper: show a status message below the form
       function showStatus(message, type) {
@@ -2830,7 +2828,7 @@
       });
 
       contactForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent page reload
         clearStatus();
 
         const emailEl = document.getElementById("email");
@@ -2862,37 +2860,40 @@
         sendBtn.querySelector(".btn-icon").innerHTML =
           '<div class="spinner"></div>';
 
-        // ── Send to Flask backend ──
+        // ── Send to FormSubmit via AJAX ──
         try {
-          const response = await fetch(`${FLASK_URL}/contact`, {
+          const response = await fetch(FORMSUBMIT_URL, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
             body: JSON.stringify({
               email: emailEl.value.trim(),
               subject: subjectEl.value.trim(),
-              message: messageEl.value.trim(),
-            }),
+              message: messageEl.value.trim()
+            })
           });
 
           const data = await response.json();
 
-          if (response.ok && data.success) {
+          if (response.ok) {
             // ── Success ──
-            showStatus("✓ " + data.message, "success");
+            showStatus("✓ Thank you! Your message has been sent successfully.", "success");
             contactForm.reset();
           } else {
             // ── Server returned an error ──
             showStatus(
-              "✗ " + (data.message || "Something went wrong."),
-              "error",
+              "✗ " + (data.error || "Something went wrong. Please try again."),
+              "error"
             );
           }
         } catch (err) {
-          // ── Network error (Flask not running, CORS issue, etc.) ──
+          // ── Network error ──
           console.error("Contact form error:", err);
           showStatus(
-            "✗ Could not reach the server. Please email me directly at jaykum122005@gmail.com",
-            "error",
+            "✗ Could not send message. Please check your connection or email me directly at jaykum122005@gmail.com",
+            "error"
           );
         } finally {
           // ── Reset button state ──
