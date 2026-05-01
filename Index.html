@@ -1913,7 +1913,7 @@
           <div class="hero-ctas reveal-text delay-5">
             <a href="#projects" class="btn btn-primary">View Projects</a>
             <a
-              href="./Flowcv.pdf"
+              href="./Jay Kumawat.pdf"
               download
               class="btn btn-secondary"
               id="downloadResume"
@@ -2137,7 +2137,7 @@
             <div class="project-meta">
               <span class="project-number">01</span>
               <div class="project-tags-row">
-                <span class="project-tech-tag">C</span>
+                <span class="project-tech-tag"><h2>C</h2></span>
                 <span class="project-tech-tag">File Handling</span>
                 <span class="project-tech-tag">CRUD</span>
               </div>
@@ -2183,6 +2183,69 @@
               </div>
             </div>
           </div>
+          <div class="projects-list">
+          <div class="project-card reveal-item">
+            <div class="project-meta">
+              <span class="project-number">02</span>
+              <div class="project-tags-row">
+                <span class="project-tech-tag"><h2>HTML</h2></span>
+                <span class="project-tech-tag">CSS</span>
+                <span class="project-tech-tag">JavaScript</span>
+                <span class="project-tech-tag">Flask</span>
+                <span class="project-tech-tag">JSON</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-impact">
+                Full-stack web platform for smart note sharing and management
+              </div>
+              <h3 class="project-title">CoffeeandNotes</h3>
+              <p class="project-desc">
+                A modern web application built to create, manage, and share notes online.
+                Developed using HTML, CSS, JavaScript, and Flask, with structured data
+                storage in JSON. The platform allows users to upload notes, search
+                efficiently, and organize content based on subject or title. It also
+                includes a secure login and profile system for personalized user
+                experience, ensuring smooth and intuitive interaction.
+              </p>
+              <div class="project-actions">
+                <a
+                  href="https://github.com/jaykum1210"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                    />
+                  </svg>
+                  GitHub
+                </a>
+                <a
+                  href="https://github.com/jaykum1210/C-Projects/tree/main/Student%20Record%20Management%20System"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn-view-details"
+                >
+                  View Details <span class="arrow">→</span>
+                </a>
+                <a
+                  href="https://coffeeandnotes.pythonanywhere.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn-view-details"
+                >
+                  View Live <span class="arrow">→</span>
+                </a>
+              </div>
+            </div>
+        </div>
           <div class="project-card ghost-card reveal-item delay-1">
             <div class="project-meta">
               <span class="project-number">02</span>
@@ -2313,6 +2376,13 @@
         </h2>
         <div class="certs-grid">
           <div class="cert-card reveal-item">
+            <div class="cert-issuer">GeeksforGeeks</div>
+              <div class="cert-title">
+                Java Programming – Self Paced Course
+              </div>
+            <div class="cert-date">03/2026</div>
+          </div>
+          <div class="cert-card reveal-item">
             <div class="cert-issuer">Google Cloud Skills Boost</div>
             <div class="cert-title">
               Google Cloud Career Launchpad – Generative AI Leader Track
@@ -2334,11 +2404,6 @@
           <div class="cert-card reveal-item delay-1">
             <div class="cert-issuer">Infosys Springboard</div>
             <div class="cert-title">Programming in C</div>
-            <div class="cert-date">12/2025</div>
-          </div>
-          <div class="cert-card reveal-item delay-1">
-            <div class="cert-issuer">ScholarHat</div>
-            <div class="cert-title">C Programming Course for Beginners</div>
             <div class="cert-date">12/2025</div>
           </div>
           <div class="cert-card reveal-item delay-1">
@@ -2797,7 +2862,8 @@
       const formStatus = document.getElementById("formStatus");
 
       // FormSubmit endpoint
-      const FORMSUBMIT_URL = "https://formsubmit.co/ajax/jaykum122005@gmail.com";
+      const FORMSUBMIT_URL =
+        "https://formsubmit.co/ajax/jaykum122005@gmail.com";
 
       // Helper: show a status message below the form
       function showStatus(message, type) {
@@ -2866,26 +2932,29 @@
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Accept": "application/json"
+              Accept: "application/json",
             },
             body: JSON.stringify({
               email: emailEl.value.trim(),
               subject: subjectEl.value.trim(),
-              message: messageEl.value.trim()
-            })
+              message: messageEl.value.trim(),
+            }),
           });
 
           const data = await response.json();
 
           if (response.ok) {
             // ── Success ──
-            showStatus("✓ Thank you! Your message has been sent successfully.", "success");
+            showStatus(
+              "✓ Thank you! Your message has been sent successfully.",
+              "success",
+            );
             contactForm.reset();
           } else {
             // ── Server returned an error ──
             showStatus(
               "✗ " + (data.error || "Something went wrong. Please try again."),
-              "error"
+              "error",
             );
           }
         } catch (err) {
@@ -2893,7 +2962,7 @@
           console.error("Contact form error:", err);
           showStatus(
             "✗ Could not send message. Please check your connection or email me directly at jaykum122005@gmail.com",
-            "error"
+            "error",
           );
         } finally {
           // ── Reset button state ──
@@ -2912,7 +2981,7 @@
       if (downloadBtn) {
         downloadBtn.addEventListener("click", function () {
           const link = document.createElement("a");
-          link.href = "Flowcv.pdf";
+          link.href = "JayKumawat.pdf";
           link.download = "Jay_Kumawat_Resume.pdf";
           document.body.appendChild(link);
           link.click();
@@ -2999,7 +3068,6 @@
         "%cBuilt with care. Every pixel intentional.",
         "color:#888;font-size:12px;",
       );
-      
     </script>
   </body>
 </html>
